@@ -6,7 +6,6 @@ import jakarta.jms.Destination;
 import lombok.AllArgsConstructor;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -25,30 +24,49 @@ public class JmsReceiverListener {
 
     private final JmsTemplate jmsTemplate;
 
+    /*
     @JmsListener(destination = JmsMessageConfig.MY_QUEUE)
     public void receiveMessageFromQueue(@Payload JmsMessage messageFrontQueue,
-                               @Headers MessageHeaders headers, Message message) {
+                               @Headers MessageHeaders headers, Message<JmsMessage> message) {
 
-        System.out.println("I Got a Message!!!!!");
-        System.out.println(messageFrontQueue);
-        System.out.println("Received <" + message + ">");
+        try {
+            System.out.println("I Got a Message!!!!!");
+            System.out.println(messageFrontQueue);
+            System.out.println("Received <" + message + ">");
+        } catch (JmsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+     */
+
+     @JmsListener(destination = JmsMessageConfig.MY_QUEUE)
+    public void messageFromQueueListen(JmsMessage jmsMessage) {
+        try {
+            System.out.println("Received Uuid: " + jmsMessage.getUuid());
+            System.out.println(jmsMessage);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
+
     @JmsListener(destination = JmsMessageConfig.MY_SEND_RCV_QUEUE)
-    public void receiveHelloMessage(@Payload JmsMessage messageFrontSendAndReceivedQueue,
-                                    @Headers MessageHeaders headers, Message jmsMessage,
-                                    org.springframework.messaging.Message springMessage) {
+    public void receiveAndPayBackFromQueueListen(@Payload JmsMessage jmsMessage,
+                                                 @Headers MessageHeaders headers) {
 
-        System.out.println("I Got a Hello World Message!!!!!");
+        System.out.println("Uuid: " + jmsMessage.getUuid());
+        System.out.println("Received Message <" + jmsMessage + ">");
+        System.out.println("**************************************");
 
+        // Send back response to the queue
         JmsMessage payLoadMsg = JmsMessage.builder()
                 .uuid(UUID.randomUUID())
-                .message("Message received in service 2")
+                .message("Message from service 1 received, Hello from Service 2")
+                .body("Hello from Service 2")
+                .to("Hello Service 1")
                 .build();
-        System.out.println(messageFrontSendAndReceivedQueue);
-        System.out.println("Received Hello world <" + springMessage + ">");
 
-        jmsTemplate.convertAndSend((Destination) Objects.requireNonNull(jmsMessage.getHeaders().get("jms_replyTo")), payLoadMsg);
+        jmsTemplate.convertAndSend((Destination) Objects.requireNonNull(headers.get("jms_replyTo")), payLoadMsg);
 
     }
 

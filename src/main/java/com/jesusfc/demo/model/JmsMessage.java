@@ -17,10 +17,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JmsMessage implements Serializable {
-
     private UUID uuid;
     private String to;
     private String message;
     private String body;
-
 }
