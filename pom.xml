@@ -18,7 +18,7 @@
     <description>Service 2 - Project to test JMS Messaging and Apache Kafka with Spring Boot 3 and Java 17</description>
 
     <properties>
-        <jacocoVersion>0.8.10</jacocoVersion>
+        <jacocoVersion>0.8.12</jacocoVersion>
     </properties>
 
     <dependencies>
