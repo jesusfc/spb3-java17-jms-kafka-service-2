@@ -2,8 +2,10 @@ package com.jesusfc.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.jms.annotation.EnableJms;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 @EnableJms
 public class Spb3Java17JmsKafkaService2Application {

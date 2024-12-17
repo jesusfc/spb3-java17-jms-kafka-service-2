@@ -22,4 +22,8 @@ public class Service2Controller {
         return new ResponseEntity<>("El servicio 2 responde OK", HttpStatus.OK);
     }
 
+    @GetMapping("/getFeign")
+    public ResponseEntity<String> getServiceFeign() {
+        return new ResponseEntity<>("El servicio Feign desde el servicio 2 -> responde OK", HttpStatus.OK);
+    }
 }
