@@ -52,16 +52,6 @@
             <version>${spring-cloud.version}</version>
         </dependency>
 
-        <!--  ZipKin Tracing distributed -->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing-bridge-brave</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-reporter-brave</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.agent</artifactId>
@@ -69,13 +59,8 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacocoVersion}</version>
-        </dependency>
-
     </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
