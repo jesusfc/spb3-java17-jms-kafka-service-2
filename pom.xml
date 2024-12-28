@@ -38,6 +38,11 @@
             <version>${spring-cloud.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- JMS Messaging Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
