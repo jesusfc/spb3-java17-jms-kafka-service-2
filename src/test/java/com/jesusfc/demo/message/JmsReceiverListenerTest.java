@@ -13,9 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class JmsReceiverListenerTest {
 
-    @Autowired
-    private JmsReceiverListener jmsReceiverListener;
-
     @Test
     void receiveMessage() {
 
